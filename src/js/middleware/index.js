@@ -1,4 +1,4 @@
-import { ADD_ARTICLE } from "../constants/action-types";
+import { ADD_ARTICLE, FOUND_BAD_WORD } from "../constants/action-types";
 const forbiddenWords = ["spam", "money"];
 
 export function forbiddenWordsMiddleware({ dispatch }) {
@@ -13,8 +13,11 @@ export function forbiddenWordsMiddleware({ dispatch }) {
           );
   
           if (foundWord.length) {
-            return dispatch({ type: "FOUND_BAD_WORD" });
+            return dispatch({ type: FOUND_BAD_WORD });
           }
+        }
+        if(action.type === FOUND_BAD_WORD){
+          console.log('No digas palabrotas')
         }
 
         return next(action);
